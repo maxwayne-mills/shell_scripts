@@ -31,7 +31,7 @@ tee << EOF > ansible.cfg
 retry_files_enabled = False
 host_key_checking = False
 roles_path = ansible/roles
-#inventory = inventory
+inventory = inventory
 
 [ssh_connection]
 control_path = /tmp/ansible-ssh-%%h-%%p-%%r
