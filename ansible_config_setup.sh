@@ -5,7 +5,8 @@
 
 # Variables
 tf=$(which terraform)
-
+local_user=cmills
+remote_user=deployuser
 # obtain computed IP address
 ip_addr=$($tf show | grep -iw "ip =" | awk 'BEGIN { FS = " = " }; { print $2}')
 
@@ -50,3 +51,19 @@ control_path = /tmp/ansible-ssh-%%h-%%p-%%r
 scp_if_ssh = True
 EOF
 fi
+
+# create ansible inventory file
+if [ -f inventory ]; then
+rm inventory
+tee << EOF > inventory
+srv1   ansible_host=159.203.94.56 ansible_connection=ssh ansible_user=$(remote_user)
+localhost ansible_host=127.0.0.1 ansible_connection=ssh ansible_user=$(localuser)
+EOF
+else
+tee << EOF > inventory
+srv1 ansible_host=159.203.94.56 ansible_connection=ssh ansible_user=$(remote_user)
+localhost ansible_host=127.0.0.1 ansible_connection=local ansible_user=$(local_user)
+EOF
+fi
+
+
