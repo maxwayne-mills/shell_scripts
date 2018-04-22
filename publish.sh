@@ -1,54 +1,17 @@
-#!/bin/sh
-set -xv
+#!/usr/bin/env bash
 
-# Publish from git to your web directory
-# Repos
-webdir=$3
-repos=$2
-dir=$3
+web_dir=/var/www
+domain_name=$1
+git_repo=$2
 
-create_archive()
-{
-	base=`basename $repos`
-	#cd into repository
-	cd $repos
+# Delete exisiting domain directory
+rm -rf  $web_dir/$domain_name
 
-	#Checkout dev repository
-	git checkout dev
+# clone directory
+git clone --depth=1 $git_repo $web_dir/$domain_name
 
-	#Create archinve
-	sudo git archive --format=tar --output /tmp/$base.tar HEAD
+# change ownership to web www-data
+chown -R www-data:www-data $web_dir/$domain_name
 
-	#Checkout the master head
-	cd $repos
-	git checkout master
-
-	# List tmp directory to confirm tar file was created.
-	ls -alrt /tmp
-
-}
-
-case $1 in
-
-create)
-	create_archive
-	;;
-publish)
-	# Create the arhive
-	create_archive
-
-	#Clear out the directory
-	sudo rm -rf $webdir/*
-
-	# Untar the arive to destination directory
-	base=`basename $repos`
-	sudo tar -xvf /tmp/$base.tar -C $webdir --overwrite
-
-	# List destination directory
-	ls -lart $webdir
-	;;
-*)
-	echo "usage: $basename $0 | publish <git repository> <web directory>"
-	echo "usage: $basename $0 | create <git repository <web directory>"
-	;;
-esac
+# change permission
+chmod 0755 $web_dir/$domain_name/*
