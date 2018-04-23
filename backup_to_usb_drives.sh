@@ -26,6 +26,14 @@ if [ $dest -a -rw ]; then
 		rsync $options ~/.ssh $dest/ssh-configs
 	fi
 		
+    echo "" && echo "Backing up .gnupg directory"
+    if [ -d $dest/.gnupg ];then
+		rsync $options ~/.gnupg $dest/gnupg
+	else
+		mkdir $dest/gnupg
+		rsync $options ~/.gnupg $dest/gnupg
+	fi
+
 	echo "" && echo "Backing up Git config directory"
 	if [ -d $dest/git ];then 
 		rsync $options ~/.gitconfig $dest/git
