@@ -1,7 +1,7 @@
 #!/bin/bash
 
-link=https://releases.hashicorp.com/vault/0.6.2/vault_0.6.2_linux_amd64.zip
-dlfile=vault_0.6.2_linux_amd64.zip
+link=https://releases.hashicorp.com/vault/0.10.0/vault_0.10.0_linux_amd64.zip
+dlfile=vault_0.10.0_linux_amd64.zip
 image_name=$(echo $link | awk 'BEGIN {FS="\/"};{print $6}')
 
 # Get vault: 
