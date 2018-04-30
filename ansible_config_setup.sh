@@ -71,3 +71,19 @@ tee << EOF > inventory
 $srv_name ansible_host=$ip_addr ansible_connection=ssh ansible_user=$remote_user
 EOF
 fi
+
+Update ssh config file with new server information
+ssh_file="~/.ssh/config
+tee << EOF >> $ssh_file
+Host $srv_name
+        user root
+        Hostname $srv_name
+        Port 22
+        ControlMaster auto
+        ControlPath /tmp/master-%r@%h:%p
+        ControlPersist 10m
+        ServerAliveInterval 120
+        ServerAliveCountMax 5
+EOF
+
+
