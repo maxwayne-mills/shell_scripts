@@ -73,7 +73,7 @@ EOF
 fi
 
 # Update ssh config file with new server information
-ssh_file="~/.ssh/config
+ssh_file="~/.ssh/config"
 tee << EOF >> $ssh_file
 Host $srv_name
         user root
