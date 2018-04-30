@@ -72,7 +72,7 @@ $srv_name ansible_host=$ip_addr ansible_connection=ssh ansible_user=$remote_user
 EOF
 fi
 
-Update ssh config file with new server information
+# Update ssh config file with new server information
 ssh_file="~/.ssh/config
 tee << EOF >> $ssh_file
 Host $srv_name
