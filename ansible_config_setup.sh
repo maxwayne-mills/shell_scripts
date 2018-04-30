@@ -65,11 +65,9 @@ if [ -f inventory ]; then
 rm inventory
 tee << EOF > inventory
 $srv_name ansible_host=$ip_addr ansible_connection=ssh ansible_user=$remote_user
-localhost ansible_host=127.0.0.1 ansible_connection=ssh ansible_user=$localuser
 EOF
 else
 tee << EOF > inventory
 $srv_name ansible_host=$ip_addr ansible_connection=ssh ansible_user=$remote_user
-localhost ansible_host=127.0.0.1 ansible_connection=local ansible_user=$local_user
 EOF
 fi
