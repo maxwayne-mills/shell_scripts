@@ -8,14 +8,6 @@ echo updating and upgrading packages
 sudo apt-get -y update
 sudo apt-get -y upgrade
 
-# Envchain dependencies
-#sudo apt-get -y install libsecret-1-0
-sudo apt-get -y insall libsecret-1-dev
-#sudo apt-get -y install libsecret-common
-sudo apt-get -y install libreadline-dev
-#sudo apt-get -y install readline-common
-#sudo apt-get -y install libreeadline-common
-
 # Install Applications
 # Gnome Control Center
 sudo apt install gnome-control-center gnome-online-accounts
@@ -25,9 +17,6 @@ sudo apt-get -y install curl
 sudo apt-get -y install git
 sudo apt-get -y install screen
 sudo apt-get -y install golang
-
-# upgrade pip
-#pip install --upgrade pip
 
 # Creature compfort stuff
 # Install aliases
@@ -49,6 +38,9 @@ cp manage-vm.sh ~/bin
 cp manage_virt.sh ~/bin
 cp backup_to_usb_drives.sh ~/bin
 
+# Install envchain
+./install_envchain.sh
+
 # Install Ansible
 ./install_ansible.sh
 
@@ -66,6 +58,9 @@ cp backup_to_usb_drives.sh ~/bin
 
 #Install Dropbox
 ./install_dropbox.sh
+
+# Install grive
+./install_grive.sh
 
 # Install atom
 ./install_atom.sh
