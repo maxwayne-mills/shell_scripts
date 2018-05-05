@@ -21,7 +21,8 @@ sudo apt-get -y install golang
 # Creature compfort stuff
 # Install aliases
 cd /tmp
-git clone https://github.com/maxwayne-mills/workstation.git
+if [ -d workstation ]; then rm -rf workstation; fi
+git clone --depth=1 https://github.com/maxwayne-mills/workstation.git
 cd workstation/system-setup
 cp bash_aliases ~/.bash_aliases
 cp gitconfig ~/.gitconfig
@@ -30,8 +31,11 @@ cp gitconfig ~/.gitconfig
 gsettings set com.canonical.Unity.Launcher launcher-position Bottom
 
 cd /tmp
-git clone https://github.com/maxwayne-mills/scripts.git
-cd /tmp/scripts/shell
+if [ -d shell_scripts ];then rm -rf shell_scripts; fi
+git clone --depth=1 https://github.com/maxwayne-mills/shell_scripts.git
+cd /tmp/shell_scripts
+
+if [ ! -d "$HOME/bin" ];then mkdir "$HOME/bin"; fi
 
 cp show_wireless.sh ~/bin
 cp manage-vm.sh ~/bin
@@ -39,7 +43,7 @@ cp manage_virt.sh ~/bin
 cp backup_to_usb_drives.sh ~/bin
 
 # Install envchain
-./install_envchain.sh
+#./install_envchain.sh
 
 # Install Ansible
 ./install_ansible.sh
