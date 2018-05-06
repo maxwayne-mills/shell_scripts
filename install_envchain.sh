@@ -12,5 +12,5 @@ sudo apt-get -y install libreeadline-common
 sudo apt-get -y install readline-common
 
 cd /tmp/envchain
-make && make install
+sudo make && sudo make install
 which envchain
