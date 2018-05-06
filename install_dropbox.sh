@@ -22,3 +22,5 @@ else
 	mv dropbox.py ~/bin
 	chmod +x ~/bin/dropbox.py
 fi
+
+echo "if [ -f $HOME/bin/dropbox.py ]; then $HOME/bin/dropbox.py start; fi" >> $HOME/.bashrc

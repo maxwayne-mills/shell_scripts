@@ -21,3 +21,6 @@ fi
 # Set permissions
 sudo chown -R cmills:cmills $git_script_home/liquidprompt
 #source $git_script_home/liquidprompt/liquidprompt
+
+## Update bashrc
+echo "if [ -f $HOME/github/liquidprompt/liquidprompt ]; then source ~/github/liquidprompt/liquidprompt; fi" >> $HOME/.bashrc
