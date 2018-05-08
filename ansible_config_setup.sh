@@ -77,8 +77,8 @@ EOF
 fi
 
 # Update ssh config file with new server information
-ssh_file="~/.ssh/config"
-if [ -f "$ssh_file" ]; then
+ssh_file="config"
+if [ -f "$(whoami).ssh/$ssh_file" ]; then
 tee << EOF >> $ssh_file
 Host $srv_name
         user root
@@ -91,8 +91,7 @@ Host $srv_name
         ServerAliveCountMax 5
 EOF
 else
-ssh_file="~/.ssh/config"
-touch $ssh_file
+touch $(whomi)/.ssh/$ssh_file
 tee << EOF > $ssh_file
 Host $srv_name
         user root
