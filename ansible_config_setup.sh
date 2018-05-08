@@ -91,7 +91,7 @@ Host $srv_name
         ServerAliveCountMax 5
 EOF
 else
-touch $(whomi)/.ssh/$ssh_file
+touch $(whoami)/.ssh/$ssh_file
 tee << EOF > $ssh_file
 Host $srv_name
         user root
