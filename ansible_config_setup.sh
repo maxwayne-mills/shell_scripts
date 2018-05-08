@@ -77,6 +77,7 @@ EOF
 fi
 
 # Update ssh config file with new server information
+if [ -f ~/.ssh/config ]; then
 ssh_file="~/.ssh/config"
 tee << EOF >> $ssh_file
 Host $srv_name
@@ -89,5 +90,22 @@ Host $srv_name
         ServerAliveInterval 120
         ServerAliveCountMax 5
 EOF
+else
+touch ~/.ssh/config
+tee << EOF >> $ssh_file
+Host $srv_name
+        user root
+        Hostname $srv_name
+        Port 22
+        ControlMaster auto
+        ControlPath /tmp/master-%r@%h:%p
+        ControlPersist 10m
+        ServerAliveInterval 120
+        ServerAliveCountMax 5
+EOF
+fi
+
+
+
 
 
