@@ -91,6 +91,7 @@ Host $srv_name
         ServerAliveCountMax 5
 EOF
 else
+ssh_file="~/.ssh/config"
 touch ~/.ssh/config
 tee << EOF >> $ssh_file
 Host $srv_name
