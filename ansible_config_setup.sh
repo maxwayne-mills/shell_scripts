@@ -77,8 +77,8 @@ EOF
 fi
 
 # Update ssh config file with new server information
-if [ -f ~/.ssh/config ]; then
 ssh_file="~/.ssh/config"
+if [ -f "$ssh_file" ]; then
 tee << EOF >> $ssh_file
 Host $srv_name
         user root
@@ -92,7 +92,7 @@ Host $srv_name
 EOF
 else
 ssh_file="~/.ssh/config"
-touch ~/.ssh/config
+touch $ssh_file
 tee << EOF >> $ssh_file
 Host $srv_name
         user root
