@@ -93,7 +93,7 @@ EOF
 else
 ssh_file="~/.ssh/config"
 touch $ssh_file
-tee << EOF >> $ssh_file
+tee << EOF > $ssh_file
 Host $srv_name
         user root
         Hostname $srv_name
