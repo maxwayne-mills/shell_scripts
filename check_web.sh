@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /usr/bin/env bash
 
 srcdir="/var/www/html/opensitesolutions.com"
 scanfile=`md5sum $srcdir/tag.html`
