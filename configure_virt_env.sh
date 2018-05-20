@@ -1,4 +1,7 @@
-#/bin/bash
+#! /usr/bin/env bash
+
+mkdir tmp_dir && cd tmp_dir
+
 ## Set up working enviroment
 clear
 echo "Creating Virtual environment"
@@ -53,7 +56,7 @@ cd ../
 mv /tmp/Vagrantfile .
 
 # Copy setup file
-cp ~/repositories/scripts/shell/setup.yml .
+cp ~/github/shell_scripts/setup.yml .
 
 if [ -f Vagrantfile ]; then
 	echo "Do you want to start the Virtual enfironment"
