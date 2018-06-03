@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Shell script utilizing Digital Oceans API
 
 get_token(){
     if [ -f ~/.do_api ]; then
@@ -13,12 +14,12 @@ get_token(){
 
 account(){
     token=$1
-    curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer $token" "https://api.digitalocean.com/v2/account" | jq -a
+    curl --silent -X GET -H "Content-Type: application/json" -H "Authorization: Bearer $token" "https://api.digitalocean.com/v2/account" | jq '..| {email, uuid }'
 }
 
 droplet(){
     token=$1
-    curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer $token" "https://api.digitalocean.com/v2/droplets?page=1&per_page=1" | jq -a
+    curl --silent -X GET -H "Content-Type: application/json" -H "Authorization: Bearer $token" "https://api.digitalocean.com/v2/droplets?page=1&per_page=1" | jq 
 }
 
 case $1 in
@@ -26,11 +27,11 @@ account)
         get_token
         account $token
         ;;
-droplet)
+list)
         get_token
         droplet $token
         ;;
 *)
-        echo "$0: account | droplet"
+        echo "$0: account | list"
         ;;
 esac
