@@ -19,7 +19,7 @@ get_account_info(){
 
 get_domains(){
   domains="$url/domains"
-  $command "$content_type" -H "$auth"  "$domains" | jq -S '.domains'
+  $command "$content_type" -H "$auth"  "$domains" | jq -S '.domains' | grep -i \"name\"
 }
 
 list_droplets(){
