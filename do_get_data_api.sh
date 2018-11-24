@@ -4,10 +4,10 @@
 
 command="curl -X GET -H"
 content_type="Content-Type: application/json"
-token=putyourdigitaloceantokenhere
+token=$1
 auth="Authorization: Bearer $token"
 
-# Different commands
+# Digital Ocean commands
 #payload="https://api.digitalocean.com/v2/images?page=1&per_page=1"
 account="https://api.digitalocean.com/v2/account"
 domains="https://api.digitalocean.com/v2/domains"
