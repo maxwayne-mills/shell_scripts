@@ -7,45 +7,51 @@ command="curl --silent -X GET -H"
 content_type="Content-Type: application/json"  
 auth="Authorization: Bearer $token"
 
-# Digital Ocean commands
-#payload="https://api.digitalocean.com/v2/images?page=1&per_page=1"
-account="https://api.digitalocean.com/v2/account"
-domains="https://api.digitalocean.com/v2/domains"
-list_droplets="https://api.digitalocean.com/v2/droplets"
-list_regions="https://api.digitalocean.com/v2/regions"
-
-
+# Digital Ocean API URL
+url="https://api.digitalocean.com/v2"
 
 # Get account information
 get_account_info(){
+    account="$url/account"
     #$command "$content_type" -H "$auth"  "$account" | jq 
     $command "$content_type" -H "$auth"  "$account" | jq '.account | {email: .email, verified: .email_verified, status: .status, UUID: .uuid}'
 }
 
 get_domains(){
+  domains="$url/domains"
   $command "$content_type" -H "$auth"  "$domains" | jq -S '.domains'
 }
 
 list_droplets(){
+    list_droplets="$url/droplets"
     $command "$content_type" -H "$auth"  "$list_droplets" | jq 
 }
 
 list_regions(){
+    list_regions="$url/regions"
     $command "$content_type" -H "$auth"  "$list_regions" | jq
+}
+
+keys(){
+    keys="$url/account/keys"
+    $command "$content_type" -H "$auth" "$keys"
 }
 
 case $1 in
 
-account)
+-account)
         get_account_info
         ;;
-domain)
+-domain)
         get_domains 
         ;;
-ld)
+-keys)
+        keys
+        ;;
+--droplet | -ld)
         list_droplets
         ;;
-lr)
+--regions | -lr)
         list_regions
         ;;
 --help | -h | *)
@@ -56,13 +62,14 @@ lr)
        
         echo ""
         echo "Usage:"
-        echo "$app_name account | domain | ld | lr | -h --help"
+        echo "$app_name -account | -domain | -keys | -ld | -lr | -h --help"
         echo ""
         echo "Options:"
-        echo -e "    -h --help \tShow this help screen"
-        echo -e "    account   \tShow account information"
-        echo -e "    domain    \tShow your domains that are managed by Digital Ocean"
-        echo -e "    ld        \tList your droplets"
-        echo -e "    lr        \tList regions available within Digital Ocean"
+        echo -e "    --help -h            \tShow this help screen"
+        echo -e "    -account             \tShow account information"
+        echo -e "    -domain              \tShow your domains that are managed by Digital Ocean"
+        echo -e "    -keys                \tShow all your SSH keys"
+        echo -e "    --droplet -ld        \tList your droplets"
+        echo -e "    --regions -lr        \tList regions available within Digital Ocean"
         ;;
 esac
