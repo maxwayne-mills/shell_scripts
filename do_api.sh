@@ -51,16 +51,18 @@ lr)
 --help | -h | *)
         clear
         app_name=$(basename $0)
-        echo $app_name
+        echo "$app_name Programmatically get information about your account using Digital Oceans API. "
+        echo ""
+       
         echo ""
         echo "Usage:"
-        echo "$app_name account | domain | ld | lr"
+        echo "$app_name account | domain | ld | lr | -h --help"
         echo ""
         echo "Options:"
-        echo -e "\t-h --help      \tShow this help screen"
-        echo -e "\taccount \tShow account information"
-        echo -e "\tdomain  \tShow your domains that are managed by Digital Ocean"
-        echo -e "\tld       \tList your droplets"
-        echo -e "\tlr      \tList regions available within Digital Ocean"
+        echo -e "    -h --help \tShow this help screen"
+        echo -e "    account   \tShow account information"
+        echo -e "    domain    \tShow your domains that are managed by Digital Ocean"
+        echo -e "    ld        \tList your droplets"
+        echo -e "    lr        \tList regions available within Digital Ocean"
         ;;
 esac
