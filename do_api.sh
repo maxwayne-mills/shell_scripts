@@ -14,7 +14,7 @@ url="https://api.digitalocean.com/v2"
 get_account_info(){
     account="$url/account"
     #$command "$content_type" -H "$auth"  "$account" | jq 
-    $command "$content_type" -H "$auth"  "$account" | jq '.account | {email: .email, verified: .email_verified, status: .status, UUID: .uuid}'
+    $command "$content_type" -H "$auth"  "$account" | jq '.account | {status: .status, UUID: .uuid, email: .email, email_verified_status: .email_verified, Current_Satus: .status_message }'
 }
 
 get_domains(){
@@ -29,12 +29,12 @@ list_droplets(){
 
 list_regions(){
     list_regions="$url/regions"
-    $command "$content_type" -H "$auth"  "$list_regions" | jq
+    $command "$content_type" -H "$auth"  "$list_regions" | jq '.regions | [.name]'
 }
 
 keys(){
     keys="$url/account/keys"
-    $command "$content_type" -H "$auth" "$keys"
+    $command "$content_type" -H "$auth" "$keys" | jq '.ssh_keys'
 }
 
 case $1 in
@@ -48,7 +48,7 @@ case $1 in
 -keys)
         keys
         ;;
---droplet | -ld)
+--droplet |-ld)
         list_droplets
         ;;
 --regions | -lr)
