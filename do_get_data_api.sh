@@ -23,15 +23,15 @@ get_account_info(){
 }
 
 get_domains(){
-  curl -X GET -H "$content_type" -H "Authorization: Bearer $token"  "$domains" | jq -S '.domains'
+  $command "$content_type" -H "$auth"  "$domains" | jq -S '.domains'
 }
 
 list_droplets(){
-    curl -X GET -H "$content_type" -H "Authorization: Bearer $token"  "$list_droplets" | jq 
+    $command "$content_type" -H "$auth"  "$list_droplets" | jq 
 }
 
 list_regions(){
-    curl -X GET -H "$content_type" -H "Authorization: Bearer $token"  "$list_regions" | jq
+    $command "$content_type" -H "$auth"  "$list_regions" | jq
 }
 
 case $1 in
