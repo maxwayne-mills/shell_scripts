@@ -24,7 +24,9 @@ get_domains(){
 
 list_droplets(){
     list_droplets="$url/droplets"
-    $command "$content_type" -H "$auth"  "$list_droplets" | jq 
+    #$command "$content_type" -H "$auth"  "$list_droplets" | jq   # Display all fields
+    #$command "$content_type" -H "$auth"  "$list_droplets" | jq -s '[.[] | [.droplets[].name]]' # Only display the droplet name
+    $command "$content_type" -H "$auth"  "$list_droplets" | jq -s '[.[] | [.droplets[0,2].name]]'
 }
 
 list_regions(){
@@ -39,20 +41,33 @@ keys(){
 
 case $1 in
 
--account)
+-account | -a)
         get_account_info
         ;;
--domain)
+-domain | -D)
         get_domains 
         ;;
--keys)
+-keys | -k)
         keys
         ;;
---droplet |-ld)
+--droplet |-d)
         list_droplets
         ;;
---regions | -lr)
+--regions | -r)
         list_regions
+        ;;
+-s | -status)
+        clear
+        echo "Account Information"
+        echo ""
+        get_account_info
+        echo ""
+        echo "Droplet Information"
+        list_droplets
+        echo ""
+        echo "Domains"
+        get_domains
+        
         ;;
 --help | -h | *)
         clear
@@ -62,14 +77,15 @@ case $1 in
        
         echo ""
         echo "Usage:"
-        echo "$app_name -account | -domain | -keys | -ld | -lr | -h --help"
+        echo "$app_name [Options"]
         echo ""
         echo "Options:"
-        echo -e "    --help -h            \tShow this help screen"
-        echo -e "    -account             \tShow account information"
-        echo -e "    -domain              \tShow your domains that are managed by Digital Ocean"
-        echo -e "    -keys                \tShow all your SSH keys"
-        echo -e "    --droplet -ld        \tList your droplets"
-        echo -e "    --regions -lr        \tList regions available within Digital Ocean"
+        echo -e "    --help -h           \tShow this help screen"
+        echo -e "    -account -a         \tShow account information"
+        echo -e "    -domain -D          \tShow your domains that are managed by Digital Ocean"
+        echo -e "    -keys -k            \tShow all your SSH keys"
+        echo -e "    -droplet -d        \tList your droplets"
+        echo -e "    -regions -r        \tList regions available within Digital Ocean"
+        echo -e "    -status -s          \tPrint Account Information"
         ;;
 esac
