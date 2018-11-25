@@ -84,8 +84,8 @@ case $1 in
         echo -e "    -account -a         \tShow account information"
         echo -e "    -domain -D          \tShow your domains that are managed by Digital Ocean"
         echo -e "    -keys -k            \tShow all your SSH keys"
-        echo -e "    -droplet -d        \tList your droplets"
-        echo -e "    -regions -r        \tList regions available within Digital Ocean"
+        echo -e "    -droplet -d         \tList your droplets"
+        echo -e "    -regions -r         \tList regions available within Digital Ocean"
         echo -e "    -status -s          \tPrint Account Information"
         ;;
 esac
