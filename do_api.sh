@@ -74,6 +74,8 @@ case $1 in
         app_name=$(basename $0)
         echo "$app_name Programmatically get information about your account using Digital Oceans API. "
         echo ""
+        echo "You are required to export your Digital ocean token prior to executing commands within this script"
+        echo "export token=\"your_digital_ocean_token\""
        
         echo ""
         echo "Usage:"
