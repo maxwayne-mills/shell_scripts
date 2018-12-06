@@ -31,7 +31,9 @@ list_droplets(){
 
 list_regions(){
     list_regions="$url/regions"
-    $command "$content_type" -H "$auth"  "$list_regions" | jq '.regions | [.name]'
+    #$command "$content_type" -H "$auth"  "$list_regions" | jq '.regions | [.name]'
+    #$command "$content_type" -H "$auth"  "$list_regions" | jq -s '[.[] | [.regions[0,1].slug]]'
+    $command "$content_type" -H "$auth"  "$list_regions" | jq -s '[.[] | [.regions[0,1,2,3,4,5,6,7,8].slug]]'
 }
 
 keys(){
