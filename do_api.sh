@@ -36,6 +36,11 @@ list_regions(){
     $command "$content_type" -H "$auth"  "$list_regions" | jq -s '[.[] | [.regions[0,1,2,3,4,5,6,7,8].slug]]'
 }
 
+list_images(){
+        list_images="$url/images"
+        $command "$content_type" -H "$auth" "$list_images" | jq -S
+}
+
 keys(){
     keys="$url/account/keys"
     $command "$content_type" -H "$auth" "$keys" | jq '.ssh_keys'
@@ -57,6 +62,9 @@ case $1 in
         ;;
 --regions | -r)
         list_regions
+        ;;
+-images | -i)
+        list_images
         ;;
 -s | -status)
         clear
@@ -91,5 +99,6 @@ case $1 in
         echo -e "    -droplet -d         \tList your droplets"
         echo -e "    -regions -r         \tList regions available within Digital Ocean"
         echo -e "    -status -s          \tPrint Account Information"
+        echo -e "     -images -i         \tPrint images"
         ;;
 esac
